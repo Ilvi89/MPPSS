@@ -12,7 +12,7 @@ public class SmoothFollow : MonoBehaviour
     // Start is called before the first frame update
     private void FixedUpdate()
     {
-        if (target == null) return;
+        if (target is null) return;
         Vector2 movePosition = target.position + offset;
         Vector3 t = Vector2.SmoothDamp(transform.position, movePosition, ref _velocity, damping);
         t.Set(t.x, t.y, offset.z);

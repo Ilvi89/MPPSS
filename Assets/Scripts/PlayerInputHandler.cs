@@ -14,6 +14,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _inputVector.x = Input.GetAxis("Horizontal");
         _inputVector.y = Input.GetAxis("Vertical");
-        _movementController.SetInputVector(_inputVector.normalized);
+        _movementController.SetInputVector(_inputVector);
     }
 }

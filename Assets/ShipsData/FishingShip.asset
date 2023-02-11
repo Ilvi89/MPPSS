@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af73c2c76b114e40ba9a89c0fb4e306c, type: 3}
   m_Name: FishingShip
   m_EditorClassIdentifier: 
-  shipType: 0
-  shipSprite: {fileID: 21300000, guid: 65f59fc1781dd314eb6c54779480e0c6, type: 3}
-  moveSpeed: 1
-  rotationSpeed: 6.71
+  lengthX50: 1
+  moveSpeed: 10
+  rotationSpeed: 1
   lights:
-  - {fileID: 21300000, guid: 61a027255fe8c9d45befd9f4b2ebab58, type: 3}
-  - {fileID: 21300000, guid: 467ab7cf8d8077440a5cf0bbc92dc178, type: 3}
-  - {fileID: 21300000, guid: f6d7be1148d08bf479f8848bea4d58a9, type: 3}
-  - {fileID: 21300000, guid: 5e338e16b3dfe9c49b4767819386f836, type: 3}
-  flag: {fileID: 21300000, guid: c7664d8c9d9279b468948c27fdf7f113, type: 3}
+  - {fileID: 21300000, guid: 48ef538bc871e06498b487245bdd8501, type: 3}
+  - {fileID: 21300000, guid: b6b0148939d426c4fb5253550ed81cce, type: 3}
+  - {fileID: 21300000, guid: 657a5300406d07345a92296bbf2022ab, type: 3}
+  - {fileID: 21300000, guid: 3eb18c4dec236c54fb45de5dcace9b24, type: 3}
+  flag: {fileID: 21300000, guid: e4dbe7c35bcd154428f15978f7445f82, type: 3}
+  shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}

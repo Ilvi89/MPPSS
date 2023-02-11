@@ -6,7 +6,7 @@ public class Path : MonoBehaviour
     private int _currentPointIndex = -1;
     public bool IsCompleted { get; private set; }
     
-    public void OnDrawGizmosSelected()
+    public void OnDrawGizmos()
     {
         var childCount = transform.childCount;
 

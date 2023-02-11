@@ -28,7 +28,7 @@ public class ShipPlane : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Todo: thing about dynamic params
+        // TODO: thing about dynamic params
         if (_isActive)
         {
             compass.UpdateRotation(_ship.DirectionAngle);
@@ -38,10 +38,10 @@ public class ShipPlane : MonoBehaviour
 
     private void Show(Ship ship)
     {
-        // Todo: Update data method
+        // TODO: Update data method
         _ship = ship;
         _shipData = ship.ShipData;
-        title.text = _shipData.ShipType.ToString();
+        title.text = "_shipData.ShipType.ToString()";
         flag.sprite = _shipData.Flag;
         GetCorrectLight();
         _isActive = true;
@@ -51,7 +51,7 @@ public class ShipPlane : MonoBehaviour
 
     private void GetCorrectLight()
     {
-        // Todo: remake. use SideChecker scene 
+        // TODO: remake. use SideChecker scene 
 
 
         sum = Quaternion.Angle(_ship.transform.rotation, player.rotation);

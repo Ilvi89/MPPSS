@@ -1,32 +1,31 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(ShipData))]
 public class Ship : MonoBehaviour
 {
-    [SerializeField] private Path path;
+    [SerializeField] [NotNull] private Path path;
     [SerializeField] private ShipData shipData;
 
     [SerializeField] [DefaultValue(true)] private bool startFromFirstPoint;
     [SerializeField] [DefaultValue(false)] private bool smoothRotation;
 
     // Todo: Move to ShipData?
-    [Min(0)] public float radiusToDetect = 1;
+    [SerializeField, Min(1)] private float radiusToDetect = 1;
 
-    [SerializeField] private Vector3 _direction;
+    private Vector3 _direction;
 
     private Transform _currentPoint;
     private Rigidbody2D _rigidbody2D;
 
     public float DirectionAngle => Quaternion.LookRotation(transform.forward, _direction).eulerAngles.z;
     public ShipData ShipData => shipData;
-
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-
         _currentPoint = path.GetNextPointTransform();
         if (startFromFirstPoint)
         {
@@ -52,7 +51,10 @@ public class Ship : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (path.IsCompleted) return;
+        if (path.IsCompleted)
+        {
+            return;
+        }
         Move();
         Rotate();
         if (Vector2.Distance(_rigidbody2D.position, _currentPoint.position) <= radiusToDetect)
@@ -62,7 +64,7 @@ public class Ship : MonoBehaviour
     private void Move()
     {
         _rigidbody2D.MovePosition(
-            _rigidbody2D.position + (Vector2) transform.up * (Time.deltaTime * shipData.MoveSpeed));
+            _rigidbody2D.position + (Vector2) transform.up * (Time.fixedDeltaTime * shipData.MoveSpeed));
     }
 
     private void Rotate()

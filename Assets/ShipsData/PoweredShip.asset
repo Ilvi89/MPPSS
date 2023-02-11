@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af73c2c76b114e40ba9a89c0fb4e306c, type: 3}
   m_Name: PoweredShip
   m_EditorClassIdentifier: 
-  shipType: 0
-  shipSprite: {fileID: 0}
-  moveSpeed: 0
-  rotationSpeed: 0
+  lengthX50: 1
+  moveSpeed: 20
+  rotationSpeed: 3
   lights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  flag: {fileID: 0}
+  - {fileID: 21300000, guid: dec4598783445c747914d3ff0dbc3f3b, type: 3}
+  - {fileID: 21300000, guid: 1060156636949ce4b96cf9d607bcc0da, type: 3}
+  - {fileID: 21300000, guid: 373a5a2899674cc4d98665b50216ebcd, type: 3}
+  - {fileID: 21300000, guid: a4a23cf5640412948bca2f681f95d626, type: 3}
+  flag: {fileID: 21300000, guid: 8008767850e870a4e8baaf5a6fc8b35c, type: 3}
+  shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}

@@ -1,5 +1,6 @@
+using System.Numerics;
 using UnityEngine;
-using UnityEngine.Internal;
+using Vector2 = UnityEngine.Vector2;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
@@ -7,13 +8,14 @@ public class MovementController : MonoBehaviour
     [Header("Ship settings")] [Range(0f, 1f)] [SerializeField]
     private float driftFactor = 0.1f;
 
+    [SerializeField] private float speed = 10;
     [SerializeField] private float accelerationFactor = 5f;
     [SerializeField] private float turnFactor = 2f;
     [SerializeField] private float rotationAngle;
-    [SerializeField] private bool instaStart = false;
+    [SerializeField] private bool instaStart;
 
 
-    private float _accelerationInput;
+    [SerializeField] private float _accelerationInput;
     private Rigidbody2D _rigidbody2D;
     private float _rotationAngle;
     private float _sterlingInput;
@@ -31,7 +33,7 @@ public class MovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyEngineForce();
+        Move();
         KillOrthogonalVelocity();
         ApplySterling();
     }
@@ -40,12 +42,6 @@ public class MovementController : MonoBehaviour
     {
         _rotationAngle -= _sterlingInput * turnFactor;
         _rigidbody2D.MoveRotation(_rotationAngle);
-    }
-
-    private void ApplyEngineForce()
-    {
-        Vector2 engineForceVector = transform.up * (_accelerationInput * accelerationFactor);
-        _rigidbody2D.AddForce(engineForceVector, ForceMode2D.Force);
     }
 
     private void KillOrthogonalVelocity()
@@ -60,5 +56,15 @@ public class MovementController : MonoBehaviour
     {
         _sterlingInput = inputVector.x;
         _accelerationInput = instaStart ? 1 : inputVector.y;
+    }
+
+    private void Move()
+    {
+        if (_accelerationInput != 0)
+        {
+            _rigidbody2D.MovePosition(
+                _rigidbody2D.position + (Vector2) transform.up * ((_accelerationInput) * (Time.fixedDeltaTime * speed * 1.85f * 0.30f * 0.5f)));
+        }
+        
     }
 }
