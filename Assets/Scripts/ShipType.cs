@@ -1,5 +1,5 @@
 ﻿public enum ShipType
 {
     Type1,
-    Type2,
+    Type2
 }

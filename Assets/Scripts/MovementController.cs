@@ -1,6 +1,4 @@
-using System.Numerics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
@@ -61,10 +59,8 @@ public class MovementController : MonoBehaviour
     private void Move()
     {
         if (_accelerationInput != 0)
-        {
             _rigidbody2D.MovePosition(
-                _rigidbody2D.position + (Vector2) transform.up * ((_accelerationInput) * (Time.fixedDeltaTime * speed * 1.85f * 0.30f * 0.5f)));
-        }
-        
+                _rigidbody2D.position + (Vector2) transform.up *
+                (_accelerationInput * (Time.fixedDeltaTime * speed * 1.85f * 0.30f * 0.5f)));
     }
 }

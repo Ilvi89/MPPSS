@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GetSideByVector : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class GetSideByVector : MonoBehaviour
     [SerializeField] private Vector3 _direction;
     [SerializeField] private float _directionAngle;
 
-    [SerializeField]  private Side side;
+    [SerializeField] private Side side;
 
     private void Update()
     {
@@ -16,8 +15,7 @@ public class GetSideByVector : MonoBehaviour
         _directionAngle = Quaternion.FromToRotation(transform.up, _direction).eulerAngles.z;
         side = GetSide(_directionAngle);
     }
-    
-    
+
 
     private void OnDrawGizmos()
     {
@@ -27,7 +25,7 @@ public class GetSideByVector : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(target.position, 1);
         Gizmos.DrawRay(target.position, target.up * 3);
-        
+
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, _direction * 3);
     }
@@ -45,6 +43,9 @@ public class GetSideByVector : MonoBehaviour
 
     private enum Side
     {
-        Front, Back, Left, Right
+        Front,
+        Back,
+        Left,
+        Right
     }
 }

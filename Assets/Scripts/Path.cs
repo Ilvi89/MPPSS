@@ -5,12 +5,12 @@ public class Path : MonoBehaviour
     [SerializeField] private PathType pathType = PathType.Loop;
     private int _currentPointIndex = -1;
     public bool IsCompleted { get; private set; }
-    
+
     public void OnDrawGizmos()
     {
         var childCount = transform.childCount;
 
-        
+
         for (var i = 0; i < transform.childCount - 1; i++)
         {
             Gizmos.color = Color.yellow;
@@ -22,18 +22,14 @@ public class Path : MonoBehaviour
         }
 
         if (pathType is PathType.Loop)
-        {
             Gizmos.DrawLine(
                 transform.GetChild(0).position,
                 transform.GetChild(childCount - 1).position);
-        }
-        
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.GetChild(0).position, 1);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.GetChild(childCount - 1).position, 1);
-
-        
     }
 
     public Transform GetNextPointTransform()

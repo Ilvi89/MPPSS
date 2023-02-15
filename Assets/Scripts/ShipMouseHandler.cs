@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -6,6 +5,7 @@ using UnityEngine.EventSystems;
 public class ShipMouseHandler : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
     [SerializeField] private UnityEvent onClick;
+
     // [SerializeField] private TransformEvent onClickTransform;
     private Ship _ship;
 

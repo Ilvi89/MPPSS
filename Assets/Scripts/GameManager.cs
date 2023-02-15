@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,8 +19,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
         }
     }
-    
-    
+
+
     public void SlowGame()
     {
         _gameIsSlowed = !_gameIsSlowed;

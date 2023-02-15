@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -14,15 +13,16 @@ public class Ship : MonoBehaviour
     [SerializeField] [DefaultValue(false)] private bool smoothRotation;
 
     // Todo: Move to ShipData?
-    [SerializeField, Min(1)] private float radiusToDetect = 1;
-
-    private Vector3 _direction;
+    [SerializeField] [Min(1)] private float radiusToDetect = 1;
 
     private Transform _currentPoint;
+
+    private Vector3 _direction;
     private Rigidbody2D _rigidbody2D;
 
     public float DirectionAngle => Quaternion.LookRotation(transform.forward, _direction).eulerAngles.z;
     public ShipData ShipData => shipData;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -38,7 +38,6 @@ public class Ship : MonoBehaviour
             }
             else
             {
-                
                 _direction = (_currentPoint.position - transform.position).normalized;
                 targetRotation = Quaternion.LookRotation(transform.forward, _direction);
             }
@@ -51,10 +50,7 @@ public class Ship : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (path.IsCompleted)
-        {
-            return;
-        }
+        if (path.IsCompleted) return;
         Move();
         Rotate();
         if (Vector2.Distance(_rigidbody2D.position, _currentPoint.position) <= radiusToDetect)

@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SideChecker : MonoBehaviour
 {
@@ -13,15 +12,15 @@ public class SideChecker : MonoBehaviour
 
     private void Update()
     {
-        Transform[] arr = new Transform[4] {front, back, left, right};
-        
+        var arr = new Transform[4] {front, back, left, right};
+
         arr.Min(t => Vector3.Distance(t.position, transform.position));
 
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
             // sideWithMinDist = Vector3.Min(arr[i], arr[i+1]);
         }
-        
+
         side = "___";
     }
 }
