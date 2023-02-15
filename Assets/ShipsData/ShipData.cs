@@ -31,4 +31,11 @@ public class ShipData : ScriptableObject
     public Sprite LightRight => lights[3];
     public Sprite[] Lights => lights;
     public Sprite Flag => flag;
+
+    public Sprite GetLight(ShipSide side)
+    {
+        return lights[(int) side];
+    }
+    
+    
 }

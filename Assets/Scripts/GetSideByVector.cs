@@ -2,50 +2,45 @@
 
 public class GetSideByVector : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform player;
 
-    [SerializeField] private Vector3 _direction;
-    [SerializeField] private float _directionAngle;
+    private Vector3 _direction;
+    private float _directionAngle;
 
-    [SerializeField] private Side side;
+    private Transform _target;
 
     private void Update()
     {
-        _direction = (target.position - transform.position).normalized;
-        _directionAngle = Quaternion.FromToRotation(transform.up, _direction).eulerAngles.z;
-        side = GetSide(_directionAngle);
+        _direction = (player.position - _target.position).normalized;
+        _directionAngle = Quaternion.FromToRotation(_target.up, _direction).eulerAngles.z;
     }
-
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1);
-        Gizmos.DrawRay(transform.position, transform.up * 3);
+        Gizmos.DrawWireSphere(_target.position, 1);
+        Gizmos.DrawRay(_target.position, _target.up * 3);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(target.position, 1);
-        Gizmos.DrawRay(target.position, target.up * 3);
+        Gizmos.DrawWireSphere(player.position, 1);
+        Gizmos.DrawRay(player.position, player.up * 3);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, _direction * 3);
+        Gizmos.DrawRay(_target.position, _direction * 3);
     }
 
-    private Side GetSide(float angle)
+    public void SetTarget(Transform t)
     {
-        return angle switch
+        _target = t;
+    }
+
+    public ShipSide GetSide()
+    {
+        return _directionAngle switch
         {
-            (>= 45 and < 135) => Side.Left,
-            (>= 135 and < 225) => Side.Back,
-            (>= 225 and < 315) => Side.Right,
-            _ => Side.Front
+            (>= 45 and < 135) => ShipSide.Left,
+            (>= 135 and < 225) => ShipSide.Back,
+            (>= 225 and < 315) => ShipSide.Right,
+            _ => ShipSide.Front
         };
-    }
-
-    private enum Side
-    {
-        Front,
-        Back,
-        Left,
-        Right
     }
 }
