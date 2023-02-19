@@ -4,8 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}
   - flag: {fileID: 21300000, guid: 8008767850e870a4e8baaf5a6fc8b35c, type: 3}
+  - soundSprite: {fileID: 21300000, guid: 291f4237bdd880b4fa4ff94a3b275d21, type: 3}
+  - shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

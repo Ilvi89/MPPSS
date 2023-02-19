@@ -2,20 +2,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(GetSideByVector))]
-public class ShipPlane : MonoBehaviour
+public class ShipPlaneImg : MonoBehaviour
 {
-    // [SerializeField] private Ship ship;
-    [SerializeField] private Image flag;
-    [SerializeField] private Image lights;
-    [SerializeField] private TMP_Text speed;    
-
+    [SerializeField] private Image img;
+    [SerializeField] private TMP_Text speed;
+    [SerializeField] private Image sound;
+    
     [SerializeField] private GetSideByVector getSideByVector;
     [SerializeField] private SmoothFollow smoothFollow;
 
-
     private Ship _targetShip;
-    private ShipData _targetShipData;
+    [SerializeField]private ShipData _targetShipData;
+    private LvlMode Mode => LevelManager.Instance?.lvlMode ?? LvlMode.Day;
 
     private void Awake()
     {
@@ -24,13 +22,28 @@ public class ShipPlane : MonoBehaviour
 
     private void Update()
     {
-        lights.sprite = _targetShipData.GetLight(getSideByVector.GetSide());
+        if (Mode == LvlMode.Night)
+        {
+            img.sprite = _targetShipData.GetLight(getSideByVector.GetSide());
+        }
     }
 
     private void Show()
     {
-        flag.sprite = _targetShipData.Flag;
-        lights.sprite = _targetShipData.GetLight(getSideByVector.GetSide());
+        sound.gameObject.SetActive(false);
+        if (Mode == LvlMode.Day)
+        {
+            img.sprite = _targetShipData.Flag;
+        } else if (Mode == LvlMode.Night)
+        {
+            img.sprite = _targetShipData.GetLight(getSideByVector.GetSide());
+        }
+        else if (Mode == LvlMode.Fog)
+        {
+            sound.gameObject.SetActive(true);
+            sound.sprite = _targetShipData.SoundSprite;
+        }
+        
         speed.text = _targetShipData.DataMoveSpeed + " knots";
         gameObject.SetActive(true);
         gameObject.SetActive(true);
@@ -50,6 +63,7 @@ public class ShipPlane : MonoBehaviour
             Show();
             return;
         }
+
         _targetShip = ship;
         _targetShipData = ship.ShipData;
         smoothFollow.SetTarget(_targetShip);

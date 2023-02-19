@@ -61,6 +61,6 @@ public class MovementController : MonoBehaviour
         if (_accelerationInput != 0)
             _rigidbody2D.MovePosition(
                 _rigidbody2D.position + (Vector2) transform.up *
-                (_accelerationInput * (Time.fixedDeltaTime * speed * 1.85f * 0.30f * 0.5f)));
+                (_accelerationInput * (Time.fixedDeltaTime * speed * 1.85f * 0.30f * 0.5f * .5f)));
     }
 }
