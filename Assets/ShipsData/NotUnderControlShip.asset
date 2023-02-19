@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af73c2c76b114e40ba9a89c0fb4e306c, type: 3}
   m_Name: NotUnderControlShip
   m_EditorClassIdentifier: 
-  lengthX50: 0
+  lengthX50: 1
   moveSpeed: 0
   rotationSpeed: 0
   lights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  flag: {fileID: 21300000, guid: 8008767850e870a4e8baaf5a6fc8b35c, type: 3}
-  shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}
+  - {fileID: 21300000, guid: 5810be572dd2b2f4c9cef5ad22c4e623, type: 3}
+  - {fileID: 21300000, guid: 42ab7203b3c25564e971fdfcc4f3823a, type: 3}
+  - {fileID: 21300000, guid: 9b8f2ab28cb0383458cee4ead8dc5970, type: 3}
+  - {fileID: 21300000, guid: 20b7c6ed284900e4a9b10f322c4f1e31, type: 3}
+  flag: {fileID: 21300000, guid: 97e7d45a2a305e44dbbb6ee802d78c9d, type: 3}
+  shipSprite: {fileID: 21300000, guid: d6e26f7b5bfd00b46b228566837ea83a, type: 3}

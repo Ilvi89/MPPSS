@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PoweredShip
   m_EditorClassIdentifier: 
   lengthX50: 1
-  moveSpeed: 5
+  moveSpeed: 15
   rotationSpeed: 3
   lights:
   - {fileID: 21300000, guid: dec4598783445c747914d3ff0dbc3f3b, type: 3}

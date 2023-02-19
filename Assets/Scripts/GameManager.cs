@@ -42,10 +42,10 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         PauseGame();
-        ShopEndPanel();
+        ShowEndPanel();
     }
 
-    private void ShopEndPanel()
+    private void ShowEndPanel()
     {
         endPanel.SetActive(true);
     }
@@ -54,5 +54,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+    }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
