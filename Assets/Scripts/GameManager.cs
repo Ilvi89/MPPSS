@@ -41,14 +41,10 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        PauseGame();
-        ShowEndPanel();
-    }
-
-    private void ShowEndPanel()
-    {
+        Time.timeScale = 0.001f;
         endPanel.SetActive(true);
     }
+
 
     public void RestartScene()
     {
@@ -59,5 +55,6 @@ public class GameManager : MonoBehaviour
     public void ExitToMenu()
     {
         SceneManager.LoadScene("Menu");
+        Time.timeScale = 1f;
     }
 }

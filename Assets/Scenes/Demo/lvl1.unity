@@ -14400,6 +14400,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1833331973526798239, guid: 437e4ee77a8361549938d866f00be167, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1517078861}
+    - target: {fileID: 1833331973526798239, guid: 437e4ee77a8361549938d866f00be167, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseGame
+      objectReference: {fileID: 0}
     - target: {fileID: 2106968636804288721, guid: 437e4ee77a8361549938d866f00be167, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -14544,6 +14552,14 @@ PrefabInstance:
       propertyPath: uiCamera
       value: 
       objectReference: {fileID: 1819230871}
+    - target: {fileID: 8525082000044871264, guid: 437e4ee77a8361549938d866f00be167, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1517078861}
+    - target: {fileID: 8525082000044871264, guid: 437e4ee77a8361549938d866f00be167, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SlowGame
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 437e4ee77a8361549938d866f00be167, type: 3}
 --- !u!1001 &8861845580235351923
