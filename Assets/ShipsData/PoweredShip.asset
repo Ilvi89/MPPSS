@@ -21,4 +21,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 373a5a2899674cc4d98665b50216ebcd, type: 3}
   - {fileID: 21300000, guid: a4a23cf5640412948bca2f681f95d626, type: 3}
   flag: {fileID: 21300000, guid: 8008767850e870a4e8baaf5a6fc8b35c, type: 3}
+  soundSprite: {fileID: 21300000, guid: 291f4237bdd880b4fa4ff94a3b275d21, type: 3}
   shipSprite: {fileID: 21300000, guid: dca49bcf07ba97e4bb4c2da4be388a18, type: 3}
