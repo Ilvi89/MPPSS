@@ -18,6 +18,7 @@ public class ShipData : ScriptableObject
     public int Length => lengthX50 * 50;
     public float Size => (float) (lengthX50 * 0.5) ;
     public float MoveSpeed => moveSpeed * 1.85f * 0.30f * 0.5f;
+    public float DataMoveSpeed => moveSpeed;
 
     public Sprite ShipSprite => shipSprite;
 

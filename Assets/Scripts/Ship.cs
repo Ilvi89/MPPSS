@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -22,6 +24,8 @@ public class Ship : MonoBehaviour
 
     public float DirectionAngle => Quaternion.LookRotation(transform.forward, _direction).eulerAngles.z;
     public ShipData ShipData => shipData;
+    
+    [SerializeField] private UnityEvent onCrash;
 
     private void Awake()
     {
@@ -76,5 +80,13 @@ public class Ship : MonoBehaviour
 
         var rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, shipData.RotationSpeed);
         _rigidbody2D.MoveRotation(rotation);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            onCrash.Invoke();
+        }
     }
 }

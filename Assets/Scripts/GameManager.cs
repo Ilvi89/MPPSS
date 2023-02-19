@@ -1,7 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject endPanel;
     private static bool _gameIsPaused;
     private static bool _gameIsSlowed;
 
@@ -34,5 +37,22 @@ public class GameManager : MonoBehaviour
             _gameIsPaused = false;
             Time.timeScale = 1f;
         }
+    }
+
+    public void EndGame()
+    {
+        PauseGame();
+        ShopEndPanel();
+    }
+
+    private void ShopEndPanel()
+    {
+        endPanel.SetActive(true);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
     }
 }

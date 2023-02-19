@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
@@ -7,13 +8,12 @@ public class MovementController : MonoBehaviour
     private float driftFactor = 0.1f;
 
     [SerializeField] private float speed = 10;
-    [SerializeField] private float accelerationFactor = 5f;
     [SerializeField] private float turnFactor = 2f;
     [SerializeField] private float rotationAngle;
     [SerializeField] private bool instaStart;
 
 
-    [SerializeField] private float _accelerationInput;
+    private float _accelerationInput;
     private Rigidbody2D _rigidbody2D;
     private float _rotationAngle;
     private float _sterlingInput;
