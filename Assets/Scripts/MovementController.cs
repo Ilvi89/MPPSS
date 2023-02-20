@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
 
     private float[] SpeedByStep => new[] {-(maxSpeed / 2), 0, maxSpeed / 2, maxSpeed};
 
-    private int SpeedStep
+    public int SpeedStep
     {
         get => speedStep;
         set => speedStep = value;
