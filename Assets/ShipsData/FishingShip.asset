@@ -23,3 +23,4 @@ MonoBehaviour:
   flag: {fileID: 21300000, guid: e4dbe7c35bcd154428f15978f7445f82, type: 3}
   soundSprite: {fileID: 21300000, guid: 291f4237bdd880b4fa4ff94a3b275d21, type: 3}
   shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}
+  soundClip: {fileID: 8300000, guid: 24280e3a215cf06499d2855d655c831a, type: 3}

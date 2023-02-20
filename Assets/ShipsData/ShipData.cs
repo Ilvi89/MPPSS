@@ -15,7 +15,9 @@ public class ShipData : ScriptableObject
     [SerializeField] private Sprite flag;
     [SerializeField] private Sprite soundSprite;
     [SerializeField] private Sprite shipSprite;
+    [SerializeField] private AudioClip soundClip;
 
+    public AudioClip SoundClip => soundClip;
     public int Length => lengthX50 * 50;
     public float Size => (float) (lengthX50 * 0.5) ;
     public float MoveSpeed => moveSpeed * 1.85f * 0.30f * 0.5f * 0.5f;

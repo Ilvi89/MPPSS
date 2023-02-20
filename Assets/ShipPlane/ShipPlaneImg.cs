@@ -7,12 +7,13 @@ public class ShipPlaneImg : MonoBehaviour
     [SerializeField] private Image img;
     [SerializeField] private TMP_Text speed;
     [SerializeField] private Image sound;
+    [SerializeField] public AudioSource soundSource;
     
     [SerializeField] private GetSideByVector getSideByVector;
     [SerializeField] private SmoothFollow smoothFollow;
 
     private Ship _targetShip;
-    [SerializeField]private ShipData _targetShipData;
+    private ShipData _targetShipData;
     private LvlMode Mode => LevelManager.Instance?.lvlMode ?? LvlMode.Day;
 
     private void Awake()
@@ -42,6 +43,7 @@ public class ShipPlaneImg : MonoBehaviour
         {
             sound.gameObject.SetActive(true);
             sound.sprite = _targetShipData.SoundSprite;
+            soundSource.clip = _targetShipData.SoundClip;
         }
         
         speed.text = _targetShipData.DataMoveSpeed + " knots";
