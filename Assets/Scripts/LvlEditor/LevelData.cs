@@ -6,13 +6,12 @@ using UnityEngine;
 public class LevelData
 {
     public string name;
-    public List<LevelShipsData> ships = new();
+    public List<EnemyData> enemies = new();
 }
 
 [Serializable]
-public class LevelShipsData
+public class EnemyData
 {
-    public Vector3 position;
-    public Quaternion quaternion;
-    public List<Vector3> points;
+    public ShipData shipData;
+    public List<Vector3> pathPoints = new();
 }

@@ -5,12 +5,14 @@ using UnityEngine.EventSystems;
 public class Editor : MonoBehaviour
 {
     [SerializeField] private GameObject pathGhost;
-    
+    [SerializeField] private ShipData currentShipData;
+
     private readonly LevelData _levelData = new();
     private readonly Storage _storage = new();
-    private GameObject _currentPath;
+    private GhostPath _currentPath;
 
     private bool _enabled;
+    private readonly string _levelName = "Test";
 
 
     private void LateUpdate()
@@ -19,13 +21,24 @@ public class Editor : MonoBehaviour
         var screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.LeftShift))
         {
             var clickPoint = new Vector3(worldPosition.x, worldPosition.y, 0);
             if (_currentPath is null)
-                _currentPath = Instantiate(pathGhost, clickPoint, Quaternion.identity);
+            {
+                _currentPath = Instantiate(pathGhost, clickPoint, Quaternion.identity).GetComponent<GhostPath>();
+                _currentPath.onRootRemove.AddListener(delegate
+                {
+                    Destroy(_currentPath);
+                    _currentPath = null;
+                    _enabled = false;
+                });
+                _currentPath.onShipClick.AddListener(delegate { Debug.Log("chose ship data pls"); });
+            }
             else
-                _currentPath.GetComponent<GhostPath>().AddPoint(new Vector3(worldPosition.x, worldPosition.y));
+            {
+                _currentPath.AddPoint(new Vector3(worldPosition.x, worldPosition.y));
+            }
         }
     }
 
@@ -36,18 +49,20 @@ public class Editor : MonoBehaviour
 
     public void Disable()
     {
-        var ghostPath = _currentPath.GetComponent<GhostPath>();
-        var shipData = ghostPath.GetShipData();
-        _levelData.ships.Add(shipData);
-        
-        
+        _levelData.enemies.Add(new EnemyData
+        {
+            shipData = currentShipData,
+            pathPoints = _currentPath.GetPath()
+        });
+
+
         _currentPath = null;
         _enabled = false;
     }
 
     public void Save()
     {
-        _levelData.name = "Test";
+        _levelData.name = _levelName;
         _storage.Save(_levelData);
     }
 }
