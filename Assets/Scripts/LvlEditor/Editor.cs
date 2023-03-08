@@ -1,17 +1,23 @@
 using System.Collections.Generic;
+using System.ComponentModel;
+using UnityEditor;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Editor : MonoBehaviour
 {
     [SerializeField] private GameObject shipGhost;
-    [SerializeField] private PathGhost pathGhost;
+    [SerializeField] private GameObject pathGhost;
     [SerializeField] private GameObject pathPointGhost;
 
     private bool _enabled = false;
     private readonly List<GameObject> _currentPathPoints = new();
-    private PathGhost _currentPath;
+    private GameObject _currentPath;
     private GameObject _currentShip;
+
+    private readonly Storage _storage = new Storage();
+    private readonly LevelData _levelData = new LevelData();
 
     private void LateUpdate()
     {
@@ -30,7 +36,6 @@ public class Editor : MonoBehaviour
                     new Vector3(worldPosition.x, worldPosition.y, 0),
                     Quaternion.identity
                 );
-                _currentPath.pathType = PathType.Path;
 
                 _currentPathPoints.Add(
                     Instantiate(pathPointGhost, clickPoint, Quaternion.identity, _currentPath.transform)
@@ -61,10 +66,19 @@ public class Editor : MonoBehaviour
 
     public void Disable()
     {
-        _enabled = false;
-        // Save
+        var shipData = new LevelShipsData();
+        shipData.position = _currentShip.transform.position;
+        shipData.quaternion = _currentShip.transform.rotation;
+        _levelData.ships.Add(shipData);
+        
         _currentShip = null;
         _currentPath = null;
         _currentPathPoints.Clear();
+        _enabled = false;
+    }
+    public void Save()
+    {
+        _levelData.name = "Test";
+        _storage.Save(_levelData);
     }
 }
