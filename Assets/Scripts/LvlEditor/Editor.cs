@@ -5,6 +5,7 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(PathLineDrawer))]
 public class Editor : MonoBehaviour
 {
     [SerializeField] private GameObject shipGhost;
@@ -16,8 +17,17 @@ public class Editor : MonoBehaviour
     private GameObject _currentPath;
     private GameObject _currentShip;
 
+    private PathLineDrawer _pathLineDrawer;
+    
+
     private readonly Storage _storage = new Storage();
     private readonly LevelData _levelData = new LevelData();
+
+
+    private void Start()
+    {
+        _pathLineDrawer = GetComponent<PathLineDrawer>();
+    }
 
     private void LateUpdate()
     {
@@ -36,17 +46,19 @@ public class Editor : MonoBehaviour
                     new Vector3(worldPosition.x, worldPosition.y, 0),
                     Quaternion.identity
                 );
-
+                
                 _currentPathPoints.Add(
                     Instantiate(pathPointGhost, clickPoint, Quaternion.identity, _currentPath.transform)
                 );
-                ;
+                _pathLineDrawer.CreateLine(_currentPathPoints[^1].transform);
+
             }
             else
             {
                 _currentPathPoints.Add(
                     Instantiate(pathPointGhost, new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity,
                         _currentPath.transform));
+                _pathLineDrawer.UpdateLine(_currentPathPoints[^1].transform);
                 if (_currentPathPoints.Count > 1)
                 {
                     var direction = (_currentPathPoints[1].transform.position - _currentShip.transform.position)
