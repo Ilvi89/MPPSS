@@ -14,4 +14,5 @@ public class LevelShipsData
 {
     public Vector3 position;
     public Quaternion quaternion;
+    public List<Vector3> points;
 }

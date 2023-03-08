@@ -13,7 +13,7 @@ public class PathLineDrawer : MonoBehaviour
 
     public void CreateLine(Transform start)
     {
-        _currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
+        _currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity, transform);
         _lineRenderer = _currentLine.GetComponent<LineRenderer>();
         _points.Clear();
         _points.Add(start.position);

@@ -311,9 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2fa26544efd0f4bb740bd20e5f0693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipGhost: {fileID: 4585801178053846875, guid: 3772f01be6a91524690d72c6f76df75c, type: 3}
   pathGhost: {fileID: 4989816342033006064, guid: 2f52a2019e04b60418f61def48d24976, type: 3}
-  pathPointGhost: {fileID: 3569964127003399894, guid: a2a5f36830c142a45b81653bd31884e4, type: 3}
 --- !u!4 &219234852
 Transform:
   m_ObjectHideFlags: 0

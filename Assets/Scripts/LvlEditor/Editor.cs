@@ -1,33 +1,17 @@
-using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PathLineDrawer))]
 public class Editor : MonoBehaviour
 {
-    [SerializeField] private GameObject shipGhost;
     [SerializeField] private GameObject pathGhost;
-    [SerializeField] private GameObject pathPointGhost;
-
-    private bool _enabled = false;
-    private readonly List<GameObject> _currentPathPoints = new();
-    private GameObject _currentPath;
-    private GameObject _currentShip;
-
-    private PathLineDrawer _pathLineDrawer;
     
+    private readonly LevelData _levelData = new();
+    private readonly Storage _storage = new();
+    private GameObject _currentPath;
 
-    private readonly Storage _storage = new Storage();
-    private readonly LevelData _levelData = new LevelData();
+    private bool _enabled;
 
-
-    private void Start()
-    {
-        _pathLineDrawer = GetComponent<PathLineDrawer>();
-    }
 
     private void LateUpdate()
     {
@@ -38,36 +22,10 @@ public class Editor : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             var clickPoint = new Vector3(worldPosition.x, worldPosition.y, 0);
-            if (_currentPathPoints.Count == 0)
-            {
-                _currentShip = Instantiate(shipGhost, clickPoint, Quaternion.identity);
-                _currentPath = Instantiate(
-                    pathGhost,
-                    new Vector3(worldPosition.x, worldPosition.y, 0),
-                    Quaternion.identity
-                );
-                
-                _currentPathPoints.Add(
-                    Instantiate(pathPointGhost, clickPoint, Quaternion.identity, _currentPath.transform)
-                );
-                _pathLineDrawer.CreateLine(_currentPathPoints[^1].transform);
-
-            }
+            if (_currentPath is null)
+                _currentPath = Instantiate(pathGhost, clickPoint, Quaternion.identity);
             else
-            {
-                _currentPathPoints.Add(
-                    Instantiate(pathPointGhost, new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity,
-                        _currentPath.transform));
-                _pathLineDrawer.UpdateLine(_currentPathPoints[^1].transform);
-                if (_currentPathPoints.Count > 1)
-                {
-                    var direction = (_currentPathPoints[1].transform.position - _currentShip.transform.position)
-                        .normalized;
-                    _currentShip.transform.rotation = Quaternion.LookRotation(
-                        _currentShip.transform.forward,
-                        direction);
-                }
-            }
+                _currentPath.GetComponent<GhostPath>().AddPoint(new Vector3(worldPosition.x, worldPosition.y));
         }
     }
 
@@ -78,16 +36,15 @@ public class Editor : MonoBehaviour
 
     public void Disable()
     {
-        var shipData = new LevelShipsData();
-        shipData.position = _currentShip.transform.position;
-        shipData.quaternion = _currentShip.transform.rotation;
+        var ghostPath = _currentPath.GetComponent<GhostPath>();
+        var shipData = ghostPath.GetShipData();
         _levelData.ships.Add(shipData);
         
-        _currentShip = null;
+        
         _currentPath = null;
-        _currentPathPoints.Clear();
         _enabled = false;
     }
+
     public void Save()
     {
         _levelData.name = "Test";

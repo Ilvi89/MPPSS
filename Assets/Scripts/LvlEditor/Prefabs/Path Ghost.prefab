@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 355317638576929066}
   - component: {fileID: 5868568246994745499}
+  - component: {fileID: 7863193814074743926}
+  - component: {fileID: 645593642874352986}
   m_Layer: 0
   m_Name: Path Ghost
   m_TagString: Untagged
@@ -131,3 +133,31 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &7863193814074743926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989816342033006064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68bb0ebbe144417a5808cb1e3e16cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linePrefab: {fileID: 187895316899985879, guid: 5a6549de7d42dfd468b8548aaa27493b, type: 3}
+  _points: []
+--- !u!114 &645593642874352986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989816342033006064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b845444ca40c412bac4dcae2964efba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPointGhost: {fileID: 3569964127003399894, guid: a2a5f36830c142a45b81653bd31884e4, type: 3}
+  shipGhost: {fileID: 4585801178053846875, guid: 3772f01be6a91524690d72c6f76df75c, type: 3}
