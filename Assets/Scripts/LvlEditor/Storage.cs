@@ -3,16 +3,21 @@ using UnityEngine;
 
 public class Storage
 {
-    public object Load(object saveDataByDefault)
+    public LevelData LevelData;
+    public LevelData Load(string name)
     {
-        return saveDataByDefault;
+        var fileStream = new StreamReader(
+            GetFileName(name));
+        return JsonUtility.FromJson<LevelData>(fileStream.ReadToEnd());
     }
 
-    public void Save(object saveData)
+    
+
+    public void Save(LevelData saveData)
     {
         var jsonDataString = JsonUtility.ToJson(saveData, true);
         var fileStream = new FileStream(
-            GetFileName(Random.Range(0, int.MaxValue).ToString()),
+            GetFileName(saveData.name),
             FileMode.Create);
 
         using (StreamWriter writer = new StreamWriter(fileStream))
