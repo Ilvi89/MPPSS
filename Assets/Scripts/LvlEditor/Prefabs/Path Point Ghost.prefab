@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8232110270758881130}
   m_Layer: 0
   m_Name: Path Point Ghost
-  m_TagString: LevelEditor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18af76a1f9484cf3b28e547dbd6b3a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onDrop:
+    m_PersistentCalls:
+      m_Calls: []
+  onClickWithShift:
+    m_PersistentCalls:
+      m_Calls: []
   onClick:
     m_PersistentCalls:
       m_Calls: []
-  dragOnSurfaces: 1

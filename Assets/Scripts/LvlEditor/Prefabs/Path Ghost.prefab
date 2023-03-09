@@ -159,5 +159,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b845444ca40c412bac4dcae2964efba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathPointGhost: {fileID: 3569964127003399894, guid: a2a5f36830c142a45b81653bd31884e4, type: 3}
-  shipGhost: {fileID: 4585801178053846875, guid: 3772f01be6a91524690d72c6f76df75c, type: 3}
+  onRootRemove:
+    m_PersistentCalls:
+      m_Calls: []
+  onShipClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onPathUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  pathPointGhostPrefab: {fileID: 3569964127003399894, guid: a2a5f36830c142a45b81653bd31884e4, type: 3}
+  shipGhostPrefab: {fileID: 4585801178053846875, guid: 3772f01be6a91524690d72c6f76df75c, type: 3}

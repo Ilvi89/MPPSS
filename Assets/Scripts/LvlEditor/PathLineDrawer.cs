@@ -34,7 +34,6 @@ public class PathLineDrawer : MonoBehaviour
         {
             _lineRenderer.SetPosition(0, newPoint.position);
             _lineRenderer.SetPosition(1, newPoint.position);
-            _lineRenderer.positionCount = _lineRenderer.positionCount - 1;
         }
         else
         {
@@ -57,5 +56,18 @@ public class PathLineDrawer : MonoBehaviour
             _lineRenderer.positionCount = _lineRenderer.positionCount - 1;
             _points.RemoveAt(index);
         }
+    }
+
+    public void SetActiveColor()
+    {
+        _lineRenderer.endColor = Color.magenta;
+        _lineRenderer.startColor = Color.magenta;
+    }
+
+    public void SetInactiveColor()
+    {
+        
+        _lineRenderer.endColor = Color.blue;
+        _lineRenderer.startColor = Color.blue;
     }
 }

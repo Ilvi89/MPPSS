@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,23 +9,41 @@ public class GhostPath : MonoBehaviour
 {
     [SerializeField] public UnityEvent onRootRemove;
     [SerializeField] public UnityEvent onShipClick;
+    [SerializeField] public UnityEvent onPathUpdate;
 
-    [SerializeField] private GameObject pathPointGhost;
-    [SerializeField] private GameObject shipGhost;
+    [SerializeField] private GameObject pathPointGhostPrefab;
+    [SerializeField] private GameObject shipGhostPrefab;
 
     private readonly List<GameObject> _points = new();
+    private bool _isEditingActivate;
 
     private PathLineDrawer _pathLineDrawer;
     private GameObject _ship;
+    public String Id;
 
     private void Start()
     {
         _pathLineDrawer = GetComponent<PathLineDrawer>();
 
         AddPoint(transform.position);
-        _pathLineDrawer.CreateLine(_points[^1].transform);
+        _pathLineDrawer.CreateLine(transform);
+        EditingActivate();
 
-        _ship = Instantiate(shipGhost, transform.position, Quaternion.identity, transform);
+        _ship = Instantiate(shipGhostPrefab, transform.position, Quaternion.identity, transform);
+    }
+
+    public void EditingActivate()
+    {
+        _pathLineDrawer.SetActiveColor(); ;
+        _points.ForEach(p => p.GetComponent<GhostPathPoint>().IsEditing = true);
+        _isEditingActivate = true;
+    }
+
+    public void EditingDeactivate()
+    {
+        _pathLineDrawer.SetInactiveColor();
+        _points.ForEach(p => p.GetComponent<GhostPathPoint>().IsEditing = false);
+        _isEditingActivate = false;
     }
 
     public List<Vector3> GetPath()
@@ -34,26 +53,35 @@ public class GhostPath : MonoBehaviour
 
     public void AddPoint(Vector2 pos)
     {
-        var newPoint = Instantiate(pathPointGhost, pos, Quaternion.identity, transform);
+        var newPoint = Instantiate(pathPointGhostPrefab, pos, Quaternion.identity, transform);
         _points.Add(newPoint);
-
-        SetShipRotation();
-
+        
+    
         var ghostPathPoint = newPoint.GetComponent<GhostPathPoint>();
-        ghostPathPoint.onClick.AddListener(delegate
-        {
-            if (_points.Count == 1) onShipClick?.Invoke();
-        });
         ghostPathPoint.onClickWithShift.AddListener(delegate { DeletePoint(newPoint); });
         ghostPathPoint.onDrop.AddListener(delegate { UpdatePoint(newPoint); });
+        
+            
+        
+
+        if (_points.Count == 1)
+        {
+            ghostPathPoint.SetRoot();
+        }
+        else if(_points.Count == 2)
+        {
+            SetShipRotation();
+        }
+        
+        if (_points.Count <= 1) return;
+        _pathLineDrawer.UpdateLine(_points[^1].transform);
+
+
     }
 
 
     private void SetShipRotation()
     {
-        if (_points.Count <= 1) return;
-
-        _pathLineDrawer.UpdateLine(_points[^1].transform);
         var direction = (_points[1].transform.position - _ship.transform.position)
             .normalized;
         _ship.transform.rotation = Quaternion.LookRotation(
@@ -63,18 +91,22 @@ public class GhostPath : MonoBehaviour
 
     private void UpdatePoint(GameObject point)
     {
-        if (_points.IndexOf(point.gameObject) == 0)
+        // if (!_isEditingActivate) return;
+        var index = _points.IndexOf(point.gameObject);
+        if (index < 2)
         {
-            _ship.transform.position = point.transform.position;
+            if (index == 0) _ship.transform.position = point.transform.position;
             SetShipRotation();
         }
 
         _points.First(o => o == point).transform.position = point.transform.position;
         _pathLineDrawer.UpdateLine(_points.IndexOf(point.gameObject), point.transform);
+        onPathUpdate?.Invoke();
     }
 
     private void DeletePoint(GameObject point)
     {
+        if (!_isEditingActivate) return;
         var index = _points.IndexOf(point.gameObject);
         if (index == 0)
         {
@@ -89,6 +121,7 @@ public class GhostPath : MonoBehaviour
             _points.RemoveAt(index);
             _pathLineDrawer.DeleteLine(index);
             Destroy(point);
+            onPathUpdate?.Invoke();
         }
     }
 }

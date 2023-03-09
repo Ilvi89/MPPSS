@@ -12,6 +12,7 @@ public class LevelData
 [Serializable]
 public class EnemyData
 {
+    public string id;
     public ShipData shipData;
     public List<Vector3> pathPoints = new();
 }

@@ -2,22 +2,17 @@
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(RectTransform))]
 public class GhostPathPoint : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
     [SerializeField] public UnityEvent onDrop;
     [SerializeField] public UnityEvent onClickWithShift;
     [SerializeField] public UnityEvent onClick;
-
-    private readonly float clickdelay = 0.5f;
-
-
-    private float _clicked;
-    private float _clicktime;
-
+    private bool _isRoot;
+    public bool IsEditing { get; set; } = true;
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1) || IsEditing == false) return;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         transform.Translate(mousePosition);
     }
@@ -25,20 +20,25 @@ public class GhostPathPoint : MonoBehaviour, IDragHandler, IEndDragHandler, IPoi
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (IsEditing == false) return;
         onDrop?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (Input.GetKey(KeyCode.LeftShift))
-        {
             onClickWithShift?.Invoke();
-            Debug.Log("click shift");
-        }
         else
-        {
             onClick?.Invoke();
-            Debug.Log("click");
-        }
+    }
+
+    public void SetRoot()
+    {
+        _isRoot = true;
+    }
+
+    public bool IsRoot()
+    {
+        return _isRoot;
     }
 }
