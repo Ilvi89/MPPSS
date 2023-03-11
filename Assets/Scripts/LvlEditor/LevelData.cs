@@ -14,5 +14,6 @@ public class EnemyData
 {
     public string id;
     public ShipData shipData;
+    public float shipMoveSpeed;
     public List<Vector3> pathPoints = new();
 }

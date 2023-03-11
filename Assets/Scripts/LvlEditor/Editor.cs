@@ -5,30 +5,38 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PathLineDrawer))]
 public class Editor : MonoBehaviour
 {
-    [SerializeField] private UnityEvent onPathRemove;
+    [Header("Require")] [SerializeField] private GhostShipPanelDropdown dropdown;
+
+    [SerializeField] private TMP_InputField nameField;
+    [SerializeField] private TMP_InputField speedField;
+
+    [Space] [SerializeField] private UnityEvent onPathRemove;
+
     [SerializeField] private UnityEvent onPathSelect;
 
     [SerializeField] private GameObject pathGhost;
-    [SerializeField] private ShipData currentShipData;
-
-    [SerializeField] private TMP_InputField inputField;
 
     [SerializeField] private LevelData _levelData = new();
     [SerializeField] private GhostPath _currentPath;
+    [SerializeField] private string _levelName;
     private readonly Storage _storage = new();
-    private GhostPath _currentPathTmp;
 
     private bool _enabled;
-    [SerializeField] private string _levelName;
 
     private void Start()
     {
-        inputField.onValueChanged.AddListener(s => _levelName = s);
+        nameField.onValueChanged.AddListener(s => _levelName = s);
+        speedField.onValueChanged.AddListener(s =>
+        {
+            var b = float.TryParse(s, out var val);
+            if (b) SetShipSpeed(val);
+        });
+        dropdown.GetComponent<TMP_Dropdown>()
+            .onValueChanged.AddListener(i => SetShipType(dropdown.GetShipData(i)));
     }
 
     private void LateUpdate()
@@ -78,6 +86,17 @@ public class Editor : MonoBehaviour
         }
     }
 
+    public void SetShipSpeed(float value)
+    {
+        _levelData.enemies.Find(data => data.id == _currentPath.Id).shipMoveSpeed = value;
+    }
+
+    public void SetShipType(ShipData value)
+    {
+        _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = value;
+    }
+
+
     public void LoadLevel()
     {
         _levelData = _storage.Load(_levelName);
@@ -109,7 +128,6 @@ public class Editor : MonoBehaviour
         _levelData.enemies.Add(new EnemyData
         {
             id = pathId,
-            shipData = currentShipData,
             pathPoints = new List<Vector3>()
         });
     }

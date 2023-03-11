@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af73c2c76b114e40ba9a89c0fb4e306c, type: 3}
   m_Name: PoweredShip
   m_EditorClassIdentifier: 
+  type: 2
   lengthX50: 1
   moveSpeed: 15
   rotationSpeed: 3

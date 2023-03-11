@@ -3,6 +3,7 @@
 [CreateAssetMenu(fileName = "New ShipData", menuName = "Ship Data", order = 51)]
 public class ShipData : ScriptableObject
 {
+    [SerializeField] private ShipType type;
     [SerializeField] [Range(1, 4)] private int lengthX50;
     [SerializeField] private float moveSpeed;
 
@@ -14,6 +15,7 @@ public class ShipData : ScriptableObject
     [SerializeField] private Sprite shipSprite;
     [SerializeField] private AudioClip soundClip;
 
+    public ShipType ShipType => type;
     public AudioClip SoundClip => soundClip;
     public int Length => lengthX50 * 50;
     public float Size => (float) (lengthX50 * 0.5);
