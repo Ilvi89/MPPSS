@@ -1,5 +1,6 @@
 ﻿public enum ShipType
 {
-    Type1,
-    Type2
+    FishingShip,
+    NotUnderControlShip,
+    PoweredShip
 }

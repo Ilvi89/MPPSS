@@ -23,8 +23,13 @@ public class SmoothFollow : MonoBehaviour
         transform.position = target.position + offset;
     }
 
+    public void SetTarget(GameObject o)
+    {
+        target = o.transform;
+    }
     public void SetTarget(Ship ship)
     {
         target = ship.transform;
     }
+
 }

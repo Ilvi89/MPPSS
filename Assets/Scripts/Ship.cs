@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,14 +7,17 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ship : MonoBehaviour
 {
-    [SerializeField] [NotNull] private Path path;
+    [SerializeField] private Path path;
     [SerializeField] private ShipData shipData;
+    [SerializeField] public float shipMoveSpeed;
 
     [SerializeField] [DefaultValue(true)] private bool startFromFirstPoint;
     [SerializeField] [DefaultValue(false)] private bool smoothRotation;
 
     // Todo: Move to ShipData?
     [SerializeField] [Min(1)] private float radiusToDetect = 1;
+
+    [SerializeField] public UnityEvent onCrash;
 
     private Transform _currentPoint;
 
@@ -24,10 +26,8 @@ public class Ship : MonoBehaviour
 
     public float DirectionAngle => Quaternion.LookRotation(transform.forward, _direction).eulerAngles.z;
     public ShipData ShipData => shipData;
-    
-    [SerializeField] private UnityEvent onCrash;
 
-    private void Awake()
+    private void SetUp()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _currentPoint = path.GetNextPointTransform();
@@ -51,6 +51,14 @@ public class Ship : MonoBehaviour
 
         GetComponentInChildren<SpriteRenderer>().sprite = shipData.ShipSprite;
     }
+    private void Awake()
+    {
+        if (path is null)
+        {
+            return;
+        }
+        SetUp();
+    }
 
     private void FixedUpdate()
     {
@@ -61,10 +69,26 @@ public class Ship : MonoBehaviour
             _currentPoint = path.GetNextPointTransform();
     }
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Player")) onCrash.Invoke();
+    }
+
+    public void SetShipData(ShipData data)
+    {
+        shipData = data;
+    }
+
+    public void SetPath(Path p)
+    {
+        path = p;
+        SetUp();
+    }
+
     private void Move()
     {
         _rigidbody2D.MovePosition(
-            _rigidbody2D.position + (Vector2) transform.up * (Time.fixedDeltaTime * shipData.MoveSpeed));
+            _rigidbody2D.position + (Vector2) transform.up * (Time.fixedDeltaTime * shipMoveSpeed * 1.85f * 0.30f * 0.5f * 0.5f));
     }
 
     private void Rotate()
@@ -80,13 +104,5 @@ public class Ship : MonoBehaviour
 
         var rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, shipData.RotationSpeed);
         _rigidbody2D.MoveRotation(rotation);
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            onCrash.Invoke();
-        }
     }
 }

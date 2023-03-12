@@ -5,7 +5,6 @@ public enum PathMovementStyle
     Continuous,
     Slerp,
     Lerp,
-    Test
 }
 
 public class PathController : MonoBehaviour

@@ -2,7 +2,7 @@
 
 public class Path : MonoBehaviour
 {
-    [SerializeField] private PathType pathType = PathType.Loop;
+    [SerializeField] public PathType pathType = PathType.Loop;
     private int _currentPointIndex = -1;
     public bool IsCompleted { get; private set; }
 

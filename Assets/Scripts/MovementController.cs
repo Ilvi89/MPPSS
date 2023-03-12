@@ -28,6 +28,10 @@ public class MovementController : MonoBehaviour
     }
 
     public float CurrentSpeed => SpeedByStep[speedStep];
+    
+    public float CurrentDirection() {
+        return transform.eulerAngles.z > 0 ? transform.eulerAngles.z : transform.eulerAngles.z * -2;
+    }
 
     private void Awake()
     {

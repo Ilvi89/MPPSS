@@ -2,7 +2,7 @@
 
 public class GetSideByVector : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    [SerializeField] public Transform player;
 
     private Vector3 _direction;
     private float _directionAngle;

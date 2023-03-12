@@ -4,9 +4,8 @@ using UnityEngine.EventSystems;
 
 public class ShipMouseHandler : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
-    [SerializeField] private UnityEvent onClick;
+    [SerializeField] public UnityEvent onClick;
 
-    // [SerializeField] private TransformEvent onClickTransform;
     private Ship _ship;
 
     private void Awake()

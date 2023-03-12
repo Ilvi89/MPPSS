@@ -4,13 +4,14 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class LevelManager : MonoBehaviour
+public partial class LevelManager : MonoBehaviour
 {
 
     public static LevelManager Instance; 
 
     // TODO: enum
     [SerializeField] public LvlMode lvlMode;
+    [SerializeField] public LevelData lvlData;
     private void Awake()
     {
         if (Instance != null)
