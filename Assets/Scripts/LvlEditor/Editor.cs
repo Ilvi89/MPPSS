@@ -12,6 +12,7 @@ public class Editor : MonoBehaviour
 {
     [Header("Require")] [SerializeField] private GhostShipPanelDropdown dropdown;
 
+
     [SerializeField] private TMP_InputField nameField;
     [SerializeField] private TMP_InputField speedField;
 
@@ -20,6 +21,8 @@ public class Editor : MonoBehaviour
     [SerializeField] private UnityEvent onPathSelect;
 
     [SerializeField] private GameObject pathGhost;
+    [SerializeField] private GameObject playerGhost;
+    [SerializeField] private GameObject endGhost;
 
     [SerializeField] private LevelData _levelData = new();
     [SerializeField] private GhostPath _currentPath;
@@ -27,6 +30,8 @@ public class Editor : MonoBehaviour
     private readonly Storage _storage = new();
 
     private bool _enabled;
+    private bool _endSetMode;
+    private bool _playerSetMode;
 
     private void Start()
     {
@@ -42,6 +47,31 @@ public class Editor : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Input.GetMouseButtonDown(0) && (_playerSetMode || _endSetMode))
+        {
+            var sp = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 wp = Camera.main.ScreenToWorldPoint(sp);
+            var clickPoint = new Vector3(wp.x, wp.y, 0);
+            if (_playerSetMode)
+            {
+                var player = Instantiate(playerGhost, clickPoint, Quaternion.identity);
+                _levelData.playerPosition = player.transform.position;
+                _endSetMode = true;
+                _playerSetMode = false;
+                return;
+            }
+
+            if (_endSetMode)
+            {
+                var end = Instantiate(endGhost, clickPoint, Quaternion.identity);
+                _levelData.endPosition = end.transform.position;
+                _playerSetMode = false;
+                _endSetMode = false;
+                return;
+            }
+        }
+
+
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
@@ -87,6 +117,11 @@ public class Editor : MonoBehaviour
         }
     }
 
+    public void SetPlayerMode(bool m)
+    {
+        _playerSetMode = m;
+    }
+
     public void SetShipSpeed(float value)
     {
         _levelData.enemies.Find(data => data.id == _currentPath.Id).shipMoveSpeed = value;
@@ -95,9 +130,7 @@ public class Editor : MonoBehaviour
     public void SetShipType([CanBeNull] ShipData value)
     {
         if (value is null)
-        {
             _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = dropdown.GetShipData(0);
-        }
 
         _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = value;
     }
@@ -117,7 +150,6 @@ public class Editor : MonoBehaviour
     {
         _currentPath.EditingDeactivate();
         UpdatePathData(_currentPath);
-        SetShipType(null);
         _currentPath = null;
         _enabled = false;
     }

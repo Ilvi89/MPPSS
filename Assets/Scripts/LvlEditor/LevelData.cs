@@ -7,6 +7,8 @@ public class LevelData
 {
     public string name;
     public List<EnemyData> enemies = new();
+    public Vector3 playerPosition;
+    public Vector3 endPosition;
 }
 
 [Serializable]

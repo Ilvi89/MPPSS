@@ -1,5 +1,6 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelMaker : MonoBehaviour
 {
@@ -7,15 +8,23 @@ public class LevelMaker : MonoBehaviour
     [SerializeField] private GameObject pathPrefab;
     [SerializeField] private GameObject pointPrefab;
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject endPrefab;
     private LevelManager _levelManager;
+    private UIPlayer _uiPlayer;
 
     [SerializeField] private GameManager gameManager;
     [SerializeField] private ShipPlaneImg shipPlane;
+    [SerializeField] private GetSideByVector getSideByVector;
+    [SerializeField] private GameObject pointer;
+    [SerializeField] private Window_QuestPointer _windowQuestPointer;
 
 
     private void Start()
     {
         _levelManager = LevelManager.Instance;
+        _uiPlayer = FindObjectOfType<UIPlayer>();
+        pointer.transform.position = _levelManager.lvlData.endPosition;
+        
 
         foreach (var enemy in _levelManager.lvlData.enemies)
         {
@@ -32,6 +41,7 @@ public class LevelMaker : MonoBehaviour
                 {
                     Debug.Log("plane");
                     shipPlane.ChangeShip(ship);
+                    
                 });
 
 
@@ -41,9 +51,26 @@ public class LevelMaker : MonoBehaviour
             }
 
             path.pathType = PathType.Path;
-            ship.ShipData.SetMoveSpeed(enemy.shipMoveSpeed);
+            ship.shipMoveSpeed = enemy.shipMoveSpeed;
             ship.SetPath(path);
             ship.SetShipData(enemy.shipData);
+            
         }
+
+
+        var player = Instantiate(playerPrefab, _levelManager.lvlData.playerPosition, Quaternion.identity);
+        var end = Instantiate(endPrefab, _levelManager.lvlData.endPosition, Quaternion.identity);
+        
+        
+        var mc = player.GetComponent<MovementController>();
+        _uiPlayer.movementController = mc;
+        end.GetComponent<Endpoint>().windowQuestPointer = _windowQuestPointer;
+        end.GetComponent<Endpoint>().onPlayerEnter.AddListener(delegate
+        {
+            gameManager.EndGame();
+        });
+        getSideByVector.player = mc.transform;
+
+        Camera.main.GetComponent<SmoothFollow>().SetTarget(player.gameObject);
     }
 }

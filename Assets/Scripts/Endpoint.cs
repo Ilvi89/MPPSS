@@ -6,11 +6,12 @@ using UnityEngine.Events;
 
 public class Endpoint : MonoBehaviour
 {
-    [SerializeField] private Window_QuestPointer windowQuestPointer;
-    [SerializeField] private UnityEvent onPlayerEnter;
+    [SerializeField] public Window_QuestPointer windowQuestPointer;
+    [SerializeField] public UnityEvent onPlayerEnter;
 
     void Start()
     {
+        windowQuestPointer ??= FindObjectOfType<Window_QuestPointer>();
         windowQuestPointer.Show(transform.position);
     }
 
@@ -18,7 +19,7 @@ public class Endpoint : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            onPlayerEnter.Invoke();
+            onPlayerEnter?.Invoke();
         }
     }
 }

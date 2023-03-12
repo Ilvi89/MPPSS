@@ -10,26 +10,26 @@ public class Window_QuestPointer : MonoBehaviour {
     [SerializeField] private Sprite arrowSprite;
     [SerializeField] private Sprite crossSprite;
 
-    private Vector3 targetPosition;
-    private RectTransform pointerRectTransform;
-    private Image pointerImage;
+    private Vector3 _targetPosition;
+    private RectTransform _pointerRectTransform;
+    private Image _pointerImage;
 
     private void Awake() {
-        pointerRectTransform = transform.Find("Pointer").GetComponent<RectTransform>();
-        pointerImage = transform.Find("Pointer").GetComponent<Image>();
+        _pointerRectTransform = transform.Find("Pointer").GetComponent<RectTransform>();
+        _pointerImage = transform.Find("Pointer").GetComponent<Image>();
 
         Hide();
     }
 
     private void FixedUpdate() {
         float borderSize = 100f;
-        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
+        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(_targetPosition);
         bool isOffScreen = targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
 
         if (isOffScreen) {
             RotatePointerTowardsTargetPosition();
 
-            pointerImage.sprite = arrowSprite;
+            _pointerImage.sprite = arrowSprite;
             Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
             if (cappedTargetScreenPosition.x <= borderSize) cappedTargetScreenPosition.x = borderSize;
             if (cappedTargetScreenPosition.x >= Screen.width - borderSize) cappedTargetScreenPosition.x = Screen.width - borderSize;
@@ -37,25 +37,25 @@ public class Window_QuestPointer : MonoBehaviour {
             if (cappedTargetScreenPosition.y >= Screen.height - borderSize) cappedTargetScreenPosition.y = Screen.height - borderSize;
 
             Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(cappedTargetScreenPosition);
-            pointerRectTransform.position = pointerWorldPosition;
-            pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
+            _pointerRectTransform.position = pointerWorldPosition;
+            _pointerRectTransform.localPosition = new Vector3(_pointerRectTransform.localPosition.x, _pointerRectTransform.localPosition.y, 0f);
         } else {
-            pointerImage.sprite = crossSprite;
+            _pointerImage.sprite = crossSprite;
             Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(targetPositionScreenPoint);
-            pointerRectTransform.position = pointerWorldPosition;
-            pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
+            _pointerRectTransform.position = pointerWorldPosition;
+            _pointerRectTransform.localPosition = new Vector3(_pointerRectTransform.localPosition.x, _pointerRectTransform.localPosition.y, 0f);
 
-            pointerRectTransform.localEulerAngles = Vector3.zero;
+            _pointerRectTransform.localEulerAngles = Vector3.zero;
         }
     }
 
     private void RotatePointerTowardsTargetPosition() {
-        Vector3 toPosition = targetPosition;
+        Vector3 toPosition = _targetPosition;
         Vector3 fromPosition = Camera.main.transform.position;
         fromPosition.z = 0f;
         Vector3 dir = (toPosition - fromPosition).normalized;
         float angle = UtilsClass.GetAngleFromVectorFloat(dir);
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle);
+        _pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle);
     }
 
     public void Hide() {
@@ -64,6 +64,6 @@ public class Window_QuestPointer : MonoBehaviour {
 
     public void Show(Vector3 targetPosition) {
         gameObject.SetActive(true);
-        this.targetPosition = targetPosition;
+        this._targetPosition = targetPosition;
     }
 }

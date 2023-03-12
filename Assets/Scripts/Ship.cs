@@ -9,6 +9,7 @@ public class Ship : MonoBehaviour
 {
     [SerializeField] private Path path;
     [SerializeField] private ShipData shipData;
+    [SerializeField] public float shipMoveSpeed;
 
     [SerializeField] [DefaultValue(true)] private bool startFromFirstPoint;
     [SerializeField] [DefaultValue(false)] private bool smoothRotation;
@@ -87,7 +88,7 @@ public class Ship : MonoBehaviour
     private void Move()
     {
         _rigidbody2D.MovePosition(
-            _rigidbody2D.position + (Vector2) transform.up * (Time.fixedDeltaTime * shipData.MoveSpeed));
+            _rigidbody2D.position + (Vector2) transform.up * (Time.fixedDeltaTime * shipMoveSpeed * 1.85f * 0.30f * 0.5f * 0.5f));
     }
 
     private void Rotate()
