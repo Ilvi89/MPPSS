@@ -21,6 +21,8 @@ public class GhostPath : MonoBehaviour
     private GameObject _ship;
     public String Id;
 
+    public Quaternion shipRotation;
+
     private void Start()
     {
         _pathLineDrawer = GetComponent<PathLineDrawer>();
@@ -87,6 +89,7 @@ public class GhostPath : MonoBehaviour
         _ship.transform.rotation = Quaternion.LookRotation(
             _ship.transform.forward,
             direction);
+        shipRotation = _ship.transform.rotation;
     }
 
     private void UpdatePoint(GameObject point)

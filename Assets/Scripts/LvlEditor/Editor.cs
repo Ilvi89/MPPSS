@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -91,8 +92,13 @@ public class Editor : MonoBehaviour
         _levelData.enemies.Find(data => data.id == _currentPath.Id).shipMoveSpeed = value;
     }
 
-    public void SetShipType(ShipData value)
+    public void SetShipType([CanBeNull] ShipData value)
     {
+        if (value is null)
+        {
+            _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = dropdown.GetShipData(0);
+        }
+
         _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = value;
     }
 
@@ -111,6 +117,7 @@ public class Editor : MonoBehaviour
     {
         _currentPath.EditingDeactivate();
         UpdatePathData(_currentPath);
+        SetShipType(null);
         _currentPath = null;
         _enabled = false;
     }
@@ -142,5 +149,6 @@ public class Editor : MonoBehaviour
     private void UpdatePathData(GhostPath path)
     {
         _levelData.enemies.First(data => data.id == path.Id).pathPoints = path.GetPath();
+        _levelData.enemies.First(data => data.id == path.Id).shipRotation = path.shipRotation;
     }
 }

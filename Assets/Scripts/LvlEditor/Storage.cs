@@ -4,10 +4,9 @@ using UnityEngine;
 public class Storage
 {
     public LevelData LevelData;
-    public LevelData Load(string name)
+    public LevelData Load(string path)
     {
-        var fileStream = new StreamReader(
-            GetFileName(name));
+        var fileStream = new StreamReader(path);
         return JsonUtility.FromJson<LevelData>(fileStream.ReadToEnd());
     }
 

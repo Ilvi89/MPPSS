@@ -12,7 +12,7 @@ public class ShipPlaneImg : MonoBehaviour
     [SerializeField] private GetSideByVector getSideByVector;
     [SerializeField] private SmoothFollow smoothFollow;
 
-    private Ship _targetShip;
+    [SerializeField] private Ship _targetShip;
     private ShipData _targetShipData;
     private LvlMode Mode => LevelManager.Instance?.lvlMode ?? LvlMode.Day;
 

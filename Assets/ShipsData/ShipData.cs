@@ -40,4 +40,9 @@ public class ShipData : ScriptableObject
     {
         return lights[(int) side];
     }
+
+    public void SetMoveSpeed(float enemyShipMoveSpeed)
+    {
+        moveSpeed = enemyShipMoveSpeed;
+    }
 }
