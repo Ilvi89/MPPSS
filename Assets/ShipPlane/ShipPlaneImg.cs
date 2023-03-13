@@ -48,7 +48,7 @@ public class ShipPlaneImg : MonoBehaviour
             soundSource.clip = _targetShipData.SoundClip;
         }
 
-        speed.text = _targetShipData.DataMoveSpeed + " knots";
+        speed.text = _targetShip.shipMoveSpeed + " knots";
         gameObject.SetActive(true);
         gameObject.SetActive(true);
     }
