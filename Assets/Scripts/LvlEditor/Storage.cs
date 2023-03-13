@@ -9,7 +9,9 @@ public class Storage
     public LevelData Load(string path)
     {
         var fileStream = new StreamReader(path);
-        return JsonUtility.FromJson<LevelData>(fileStream.ReadToEnd());
+        var json = JsonUtility.FromJson<LevelData>(fileStream.ReadToEnd());
+        
+        return json;
     }
 
 

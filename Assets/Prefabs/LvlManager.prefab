@@ -45,3 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lvlMode: 0
+  lvlData:
+    name: 
+    enemies: []
+    playerPosition: {x: 0, y: 0, z: 0}
+    endPosition: {x: 0, y: 0, z: 0}
+  ListOfShipData:
+  - {fileID: 11400000, guid: a6f1655af726c7c429f64e9ad6f3a860, type: 2}
+  - {fileID: 11400000, guid: b3d28f8eba9754e4093a35c2199029df, type: 2}
+  - {fileID: 11400000, guid: 219158238a8d3af48b7cc893327e0905, type: 2}

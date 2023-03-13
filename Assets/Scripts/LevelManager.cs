@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
-public partial class LevelManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
-
-    public static LevelManager Instance; 
+    public static LevelManager Instance;
 
     // TODO: enum
     [SerializeField] public LvlMode lvlMode;
-    [SerializeField] public LevelData lvlData;
+    public LevelData lvlData;
+    public string lvlDataName;
+    [SerializeField] public List<ShipData> ListOfShipData;
+
     private void Awake()
     {
         if (Instance != null)
@@ -24,6 +25,17 @@ public partial class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SetLvlData(LevelData data)
+    {
+        Instance.lvlDataName = data.name;
+        Instance.lvlData = data;
+    }
+
+    public ShipData GetShipData(int i)
+    {
+        return ListOfShipData[i];
+    }
+
 
     public void LoadLvl(string sceneName)
     {
@@ -32,7 +44,7 @@ public partial class LevelManager : MonoBehaviour
 
     public void SetMode(int mode)
     {
-        lvlMode = (LvlMode)Enum.ToObject(typeof(LvlMode), mode);
+        lvlMode = (LvlMode) Enum.ToObject(typeof(LvlMode), mode);
     }
 }
 

@@ -7,7 +7,8 @@ public class LevelFileManager : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
     private readonly Storage _storage = new();
-
+    
+    
     public void OpenFileExplorer()
     {
         var br = new BrowserProperties
@@ -21,7 +22,7 @@ public class LevelFileManager : MonoBehaviour
 
     private IEnumerator GetLevel(string path)
     {
-        levelManager.lvlData = _storage.Load(path);
+        levelManager.SetLvlData(_storage.Load(path));
         yield return new WaitForSeconds(3);
 
         if (levelManager.lvlData is not null)

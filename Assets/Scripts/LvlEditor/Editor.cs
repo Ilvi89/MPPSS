@@ -128,12 +128,12 @@ public class Editor : MonoBehaviour
         _levelData.enemies.Find(data => data.id == _currentPath.Id).shipMoveSpeed = value;
     }
 
-    public void SetShipType([CanBeNull] ShipData value)
+    public void SetShipType(int? shipType)
     {
-        if (value is null)
-            _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = dropdown.GetShipData(0);
+        if (shipType == null)
+            _levelData.enemies.Find(data => data.id == _currentPath.Id).shipType = dropdown.GetShipData(0);
 
-        _levelData.enemies.Find(data => data.id == _currentPath.Id).shipData = value;
+        if (shipType != null) _levelData.enemies.Find(data => data.id == _currentPath.Id).shipType = (int) shipType;
     }
 
 

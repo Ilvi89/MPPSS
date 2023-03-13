@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2214882778010033808}
   - component: {fileID: 5185099787213302780}
-  - component: {fileID: 2757950862701799247}
   m_Layer: 5
   m_Name: END Ghost
   m_TagString: Finish
@@ -85,19 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2757950862701799247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527621875026156109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99aeb2cc3b9855d499e0068f05367c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windowQuestPointer: {fileID: 0}
-  onPlayerEnter:
-    m_PersistentCalls:
-      m_Calls: []

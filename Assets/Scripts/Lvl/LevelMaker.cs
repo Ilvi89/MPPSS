@@ -52,6 +52,7 @@ public class LevelMaker : MonoBehaviour
             path.pathType = PathType.Path;
             ship.shipMoveSpeed = enemy.shipMoveSpeed;
             ship.SetPath(path);
+            ship.SetShipData(_levelManager.GetShipData(enemy.shipType));
             
         }
 
@@ -71,4 +72,6 @@ public class LevelMaker : MonoBehaviour
 
         Camera.main.GetComponent<SmoothFollow>().SetTarget(player.gameObject);
     }
+
+    
 }
