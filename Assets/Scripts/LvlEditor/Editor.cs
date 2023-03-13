@@ -34,6 +34,9 @@ public class Editor : MonoBehaviour
     private bool _endSetMode;
     private bool _playerSetMode;
 
+    private GameObject _playerGhost;
+    private GameObject _endGhost;
+
     private void Start()
     {
         nameField.onValueChanged.AddListener(s => _levelName = s);
@@ -56,6 +59,7 @@ public class Editor : MonoBehaviour
             if (_playerSetMode)
             {
                 var player = Instantiate(playerGhost, clickPoint, Quaternion.identity);
+                _playerGhost = player;
                 _levelData.playerPosition = player.transform.position;
                 _endSetMode = true;
                 _playerSetMode = false;
@@ -65,6 +69,7 @@ public class Editor : MonoBehaviour
             if (_endSetMode)
             {
                 var end = Instantiate(endGhost, clickPoint, Quaternion.identity);
+                _endGhost = end;
                 _levelData.endPosition = end.transform.position;
                 _playerSetMode = false;
                 _endSetMode = false;
@@ -120,6 +125,11 @@ public class Editor : MonoBehaviour
 
     public void SetPlayerMode(bool m)
     {
+        if (_playerGhost)
+        {
+            Destroy(_playerGhost);
+            Destroy(_endGhost);
+        }
         _playerSetMode = m;
     }
 
