@@ -61,6 +61,7 @@ public class ShipPlaneImg : MonoBehaviour
 
     public void ChangeShip(Ship ship)
     {
+        Debug.Log(ship.ShipData.ShipType);
         if (ship == _targetShip)
         {
             if (isActiveAndEnabled) return;

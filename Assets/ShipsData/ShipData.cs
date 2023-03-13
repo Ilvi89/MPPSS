@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New ShipData", menuName = "Ship Data", order = 51)]
+[Serializable]
 public class ShipData : ScriptableObject
 {
     [SerializeField] private ShipType type;

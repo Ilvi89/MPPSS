@@ -64,6 +64,6 @@ public class Window_QuestPointer : MonoBehaviour {
 
     public void Show(Vector3 targetPosition) {
         gameObject.SetActive(true);
-        this._targetPosition = targetPosition;
+        _targetPosition = targetPosition;
     }
 }

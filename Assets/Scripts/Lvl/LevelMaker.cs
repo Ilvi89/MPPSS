@@ -39,9 +39,8 @@ public class LevelMaker : MonoBehaviour
             ship.GetComponent<ShipMouseHandler>().onClick
                 .AddListener(() =>
                 {
-                    Debug.Log("plane");
+                    Debug.Log(ship.ShipData.ShipType);
                     shipPlane.ChangeShip(ship);
-                    
                 });
 
 
@@ -53,7 +52,6 @@ public class LevelMaker : MonoBehaviour
             path.pathType = PathType.Path;
             ship.shipMoveSpeed = enemy.shipMoveSpeed;
             ship.SetPath(path);
-            ship.SetShipData(enemy.shipData);
             
         }
 

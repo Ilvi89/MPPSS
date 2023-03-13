@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using AnotherFileBrowser.Windows;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class LevelFileManager : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
-    [SerializeField] private TMP_InputField fileName;
-    [SerializeField] private string path;
     private readonly Storage _storage = new();
-    
+
     public void OpenFileExplorer()
     {
-        // _path = EditorUtility.OpenFilePanel("Selert level (.save)", Application.persistentDataPath + "/saves/", "save");
-        path = Application.persistentDataPath + "/saves/" + fileName.text + ".save";
-        StartCoroutine(GetLevel());
+        var br = new BrowserProperties
+        {
+            title = "Save files (*.save)",
+            filterIndex = 0
+        };
+
+        new FileBrowser().OpenFileBrowser(br, path => { StartCoroutine(GetLevel(path)); });
     }
 
-    private IEnumerator GetLevel()
+    private IEnumerator GetLevel(string path)
     {
         levelManager.lvlData = _storage.Load(path);
         yield return new WaitForSeconds(3);

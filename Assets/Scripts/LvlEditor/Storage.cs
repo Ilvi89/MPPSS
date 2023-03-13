@@ -1,32 +1,34 @@
 using System.IO;
+using AnotherFileBrowser.Windows;
 using UnityEngine;
 
 public class Storage
 {
     public LevelData LevelData;
+
     public LevelData Load(string path)
     {
         var fileStream = new StreamReader(path);
         return JsonUtility.FromJson<LevelData>(fileStream.ReadToEnd());
     }
 
-    
 
     public void Save(LevelData saveData)
     {
-        var jsonDataString = JsonUtility.ToJson(saveData, true);
-        var fileStream = new FileStream(
-            GetFileName(saveData.name),
-            FileMode.Create);
+        var bp = new BrowserProperties();
+        bp.filter = "save files (*.save)|*.save";
+        bp.filterIndex = 0;
 
-        using (StreamWriter writer = new StreamWriter(fileStream))
+        new FileBrowser().SaveFileBrowser(bp, saveData.name, ".save", path =>
         {
-            writer.Write(jsonDataString);
-        }
-    }
+            var jsonDataString = JsonUtility.ToJson(saveData, true);
+            var fileStream = new FileStream(path,
+                FileMode.Create);
 
-    private string GetFileName(string name)
-    {
-        return Application.persistentDataPath + "/saves/" + name + ".save";
+            using (var writer = new StreamWriter(fileStream))
+            {
+                writer.Write(jsonDataString);
+            }
+        });
     }
 }
