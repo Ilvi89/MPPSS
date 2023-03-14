@@ -25,9 +25,10 @@ public class ShipPlaneImg : MonoBehaviour
     private void Update()
     {
         if (Mode == LvlMode.Night) img.sprite = _targetShipData.GetLight(getSideByVector.GetSide());
-        dir.text = Mathf.Round((_targetShip.transform.eulerAngles.z > 0
-            ? _targetShip.transform.eulerAngles.z
-            : _targetShip.transform.eulerAngles.z * -2)) + "°";
+        var direct = 360 - _targetShip.transform.eulerAngles.z;
+        dir.text = Mathf.Round((direct > 0
+            ? direct
+            : direct * -2)) + "°";
     }
 
     private void Show()

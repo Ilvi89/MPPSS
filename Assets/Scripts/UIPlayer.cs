@@ -24,7 +24,7 @@ public class UIPlayer : MonoBehaviour
             return;
         }
         _speedField.text = movementController.CurrentSpeed + "knots";
-        _dirField.text = movementController.CurrentDirection() + "°";
+        _dirField.text = Mathf.CeilToInt(movementController.CurrentDirection()) + "°";
         StepsPaint(movementController.SpeedStep);
 
 
