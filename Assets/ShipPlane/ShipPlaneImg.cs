@@ -61,7 +61,7 @@ public class ShipPlaneImg : MonoBehaviour
 
     public void ChangeShip(Ship ship)
     {
-        Debug.Log(ship.ShipData.ShipType);
+        
         if (ship == _targetShip)
         {
             if (isActiveAndEnabled) return;
@@ -71,6 +71,7 @@ public class ShipPlaneImg : MonoBehaviour
 
         _targetShip = ship;
         _targetShipData = ship.ShipData;
+        Debug.Log(_targetShip.name);
         smoothFollow.SetTarget(_targetShip);
         getSideByVector.SetTarget(ship.transform);
         Hide();

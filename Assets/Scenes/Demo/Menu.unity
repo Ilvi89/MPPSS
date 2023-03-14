@@ -1916,8 +1916,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Night
       m_Image: {fileID: 0}
-    - m_Text: Fog
-      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2460,6 +2458,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76af864695716f84392e06ce546a799b, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 13ffc699a65eeee4c9483bdbe2e97242, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: a6f1655af726c7c429f64e9ad6f3a860, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8bc4190c162519d4ea497c4878d89583, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 219158238a8d3af48b7cc893327e0905, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e515ff35231ae5459e9c2b613de4622, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d2a31aadca4bbe44ad09d8128ea955a, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ba7a66c0da5416408bf07f7ac106629, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bfb2ecc0395ed244890eb2f618d2bbd, type: 2}
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: ListOfShipData.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8ae20a13664017f4382d637776680136, type: 2}
     - target: {fileID: 5613990302618755195, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
       propertyPath: m_RootOrder
       value: 3

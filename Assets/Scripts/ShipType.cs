@@ -2,5 +2,13 @@
 {
     FishingShip,
     NotUnderControlShip,
-    PoweredShip
+    PoweredShip,
+    Minesweepers,
+    ShipWithoutManeuverAbility,
+    PushTug,
+    RopeTug,
+    DredgingShip,
+    PilotShip,
+    ShipAtAnchor,
+    ShipAground,
 }

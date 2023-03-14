@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af73c2c76b114e40ba9a89c0fb4e306c, type: 3}
+  m_Name: ShipWithoutManeuverAbility
+  m_EditorClassIdentifier: 
+  type: 4
+  lengthX50: 1
+  moveSpeed: 0
+  rotationSpeed: 0
+  lights:
+  - {fileID: 21300000, guid: 141aed515ee25274cac5dc2ff1851efa, type: 3}
+  - {fileID: 21300000, guid: 58c5593a1c2b8c24d80021dc3bfa9982, type: 3}
+  - {fileID: 21300000, guid: f528fc3b9d6ef6940b3cee0489bce56d, type: 3}
+  - {fileID: 21300000, guid: 1475948042513944882eb60dff107ea0, type: 3}
+  flag: {fileID: 21300000, guid: 183b314594317b148a4db1f5623dd9ab, type: 3}
+  soundSprite: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  shipSprite: {fileID: 21300000, guid: ae6065ed95973ba44b460845409f43a3, type: 3}
+  soundClip: {fileID: 8300000, guid: 24280e3a215cf06499d2855d655c831a, type: 3}
+  description: "\u0421\u0443\u0434\u043D\u043E \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0435
+    \u0432 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u043C\u0430\u043D\u0435\u0432\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C"

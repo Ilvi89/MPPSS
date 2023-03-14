@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New ShipData", menuName = "Ship Data", order = 51)]
 [Serializable]
@@ -17,6 +18,10 @@ public class ShipData : ScriptableObject
     [SerializeField] private Sprite shipSprite;
     [SerializeField] private AudioClip soundClip;
 
+    
+    [SerializeField] private string description;
+
+    public string Description => Description;
     public ShipType ShipType => type;
     public AudioClip SoundClip => soundClip;
     public int Length => lengthX50 * 50;

@@ -893,11 +893,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3350573354033838835, guid: c41f874761931e841b1b89cf1c242c32, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3933448196262919857, guid: c41f874761931e841b1b89cf1c242c32, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 292087272}
+    - target: {fileID: 3933448196262919857, guid: c41f874761931e841b1b89cf1c242c32, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4352897258280131788, guid: c41f874761931e841b1b89cf1c242c32, type: 3}
       propertyPath: m_Pivot.x
@@ -1674,6 +1678,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
+      propertyPath: lvlData.playerPosition.x
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 5613990302618755194, guid: 8daa2f8bb64e8c447a42eb9637e4eba0, type: 3}
       propertyPath: lvlData.enemies.Array.size
       value: 1

@@ -139,7 +139,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &4831966702486977907
 BoxCollider2D:
@@ -165,7 +165,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 3}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &4736612326524926945
 MonoBehaviour:
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   shipData: {fileID: 11400000, guid: b3d28f8eba9754e4093a35c2199029df, type: 2}
+  shipMoveSpeed: 0
   startFromFirstPoint: 1
   smoothRotation: 0
   radiusToDetect: 1
